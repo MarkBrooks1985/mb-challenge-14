@@ -1,0 +1,20 @@
+{
+  "name": "mb-blog-spot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkBrooks1985/mb-blog-spot.git"
+  },
+  "author": "Mark Brooks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarkBrooks1985/mb-blog-spot/issues"
+  },
+  "homepage": "https://github.com/MarkBrooks1985/mb-blog-spot#readme"
+}
