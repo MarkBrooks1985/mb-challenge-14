@@ -1,0 +1,21 @@
+<section>
+    <div>
+        <h1>{{blog.title}}</h1>
+        <p><span>Author:</span> {{blog.user}} </p>
+        <p><span>Created on:</span> {{blog.date}}</p>
+
+        <p>{{blog.content}}</p>
+        <hr>
+        <div>
+            {{#each blog.comment as |comment}}
+            <p> {{comment.content}} </p>
+            {{/each}}
+        </div>
+        <p>
+            <a href="/editBlog/{{blog.id}}" role="button">Edit Blog</a>
+            <a role="button">Delete Blog</a>
+        </p>
+    </div>
+</section>
+
+<script src="/public/js/edit-blog.js"></script>
