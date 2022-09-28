@@ -1,21 +1,22 @@
-<section>
-    <div>
-        <h1>{{blog.title}}</h1>
-        <p><span>Author:</span> {{blog.user}} </p>
-        <p><span>Created on:</span> {{blog.date}}</p>
+<section id="singleBlog">
+    <div class="jumbotron">
+        <h1 class="display-4">{{blog.title}}</h1>
+        <p><span id="authorName">Author:</span> {{blog.user.username}} </p>
+        <p><span data-postID="{{blog.id}}" id="datePosted">Created On:</span> {{blog.date}}</p>
 
-        <p>{{blog.content}}</p>
-        <hr>
-        <div>
-            {{#each blog.comment as |comment}}
+        <p class="lead">{{blog.content}}</p>
+        <hr class="my-4">
+        <div id="comments">
+            {{#each blog.comment as |comment|}}
             <p> {{comment.content}} </p>
             {{/each}}
         </div>
-        <p>
-            <a href="/editBlog/{{blog.id}}" role="button">Edit Blog</a>
-            <a role="button">Delete Blog</a>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/editPost/{{blog.id}}" role="button">Edit Post</a>
+            <a class="btn btn-primary btn-lg" role="button" id="deletePost">Delete Post</a>
+            <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Add Comment</a> -->
         </p>
     </div>
 </section>
 
-<script src="/public/js/edit-blog.js"></script>
+<script src="/public/js/blog.js"></script>
