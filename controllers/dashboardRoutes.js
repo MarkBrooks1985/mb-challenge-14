@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Blog } = require("../models/Blog");
 const withAuth = require("../utils/auth");
 
-router.get("/", withAuth, async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findAll({
       where: {
@@ -15,7 +15,7 @@ router.get("/", withAuth, async (req, res) => {
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render("all-blogs-admin", {
+    res.render("blog", {
       layout: "dashboard",
       blogs,
     });
