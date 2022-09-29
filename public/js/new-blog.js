@@ -6,8 +6,8 @@ const newBlogHandler = async (event) => {
   const body = document.querySelector("#body-entry").value.trim();
   const user = document.querySelector("#user-log").value.trim();
 
-  if (title && body && username) {
-    const response = await fetch("/api/blogpost/newPost", {
+  if (title && body && user) {
+    const response = await fetch("/api/blog", {
       method: "POST",
       body: JSON.stringify({ title, body, user }),
       headers: { "Content-Type": "application/json" },
@@ -24,4 +24,4 @@ const newBlogHandler = async (event) => {
   }
 };
 
-document.querySelector("#newFormBtn").addEventListener("click", newPostHandler);
+document.querySelector("#newFormBtn").addEventListener("click", newBlogHandler);

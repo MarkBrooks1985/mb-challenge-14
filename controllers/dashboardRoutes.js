@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Blog } = require("../models/Blog");
 const withAuth = require("../utils/auth");
 
-router.get("/dashboard", withAuth, async (req, res) => {
+router.get("/blog", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findAll({
       where: {
@@ -24,8 +24,8 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
-router.get("/new", withAuth, (req, res) => {
-  res.render("new-blog", {
+router.get("/newBlog", withAuth, (req, res) => {
+  res.render("newBlog", {
     layout: "dashboard",
   });
 });
@@ -39,7 +39,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
     if (blogData) {
       const blog = blogData.get({ plain: true });
 
-      res.render("edit-post", {
+      res.render("edit-blog", {
         layout: "dashboard",
         blog,
       });
@@ -47,7 +47,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
       res.status(404).end();
     }
   } catch (err) {
-    res.redirect("login");
+    res.redirect("/login");
   }
 });
 
