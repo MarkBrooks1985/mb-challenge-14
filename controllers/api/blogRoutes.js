@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Blog, Comment, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-router.post("/editblog", withAuth, async (req, res) => {
+router.post("/newblog", withAuth, async (req, res) => {
   try {
     const newBlog = await Blog.create({
       ...req.body,
@@ -15,7 +15,7 @@ router.post("/editblog", withAuth, async (req, res) => {
   }
 });
 
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete("/deleteblog/:id", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.destroy({
       where: {
@@ -35,15 +35,18 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
-router.put("/:id", withAuth, async (req, res) => {
+router.put("/editblog/:id", withAuth, async (req, res) => {
   try {
-    const [affectedBlog] = await Blog.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
+    const affectedBlog = await Blog.update(
+      { title: req.body.title, body: req.body.body, user: req.body.user_id },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
 
-    if (affectedBlog > 0) {
+    if (!affectedBlog > 0) {
       res.status(200).end();
     } else {
       res.status(404).end();
