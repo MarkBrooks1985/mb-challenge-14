@@ -1,25 +1,26 @@
 const router = require("express").Router();
-const { Blog } = require("../models/Blog");
+const { Blog } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/blog", withAuth, async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findAll({
       where: {
         // check if id or userid
-        id: req.session.id,
+        user_id: req.session.user_id,
       },
     });
 
     // Serialize data so the template can read it
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
-
+    console.log(blogs);
     // Pass serialized data and session flag into template
     res.render("blog", {
       layout: "dashboard",
       blogs,
     });
   } catch (err) {
+    console.log(err);
     res.redirect("login");
   }
 });
@@ -39,7 +40,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
     if (blogData) {
       const blog = blogData.get({ plain: true });
 
-      res.render("edit-blog", {
+      res.render("editblog", {
         layout: "dashboard",
         blog,
       });

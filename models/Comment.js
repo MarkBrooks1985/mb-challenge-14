@@ -15,6 +15,8 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    blog_id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
   },
   {
     sequelize,

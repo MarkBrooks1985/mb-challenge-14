@@ -27,14 +27,17 @@ router.get("/blog/:id", async (req, res) => {
         User,
         {
           model: Comment,
-          include: [User],
+          include: [User, Blog],
         },
       ],
     });
 
     if (blogData) {
       const blog = blogData.get({ plain: true });
-      res.render("single-blog", { blog });
+      console.log(blog);
+      res.render("blog", {
+        blogs: [blog],
+      });
     } else {
       res.status(404).end();
     }

@@ -16,6 +16,4 @@ const handleDeleteBlog = async (event) => {
   }
 };
 
-document
-  .querySelector("#deleteBlog")
-  .addEventListener("click", handleDeleteBlog);
+document.addEventListener("click", handleDeleteBlog);
