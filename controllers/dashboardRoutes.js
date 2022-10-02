@@ -31,7 +31,19 @@ router.get("/newBlog", withAuth, (req, res) => {
   });
 });
 
-router.get("/edit/:id", withAuth, async (req, res) => {
+router.get("/editblog", withAuth, (req, res) => {
+  res.render("editblog", {
+    layout: "dashboard",
+  });
+});
+
+router.get("/comment", withAuth, (req, res) => {
+  res.render("comment", {
+    layout: "dashboard",
+  });
+});
+
+router.get("/:id", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.findAll(req.params.id);
 

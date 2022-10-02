@@ -7,21 +7,12 @@ const newBlogHandler = async (event) => {
   // const user = document.querySelector("#user-log").value.trim();
 
   if (title && body) {
-    const response = await fetch("/api/blog", {
+    await fetch("/api/blog/newblog", {
       method: "POST",
       body: JSON.stringify({ title, body }),
       headers: { "Content-Type": "application/json" },
     });
-
-    if (response.ok) {
-      console.log(response);
-
-      document.location.replace("/");
-      alert("New Blog Created!");
-    }
-  } else {
-    alert("Must input title, body, and valid user!");
+    document.location.replace("/dashboard");
   }
 };
-
 document.querySelector("#newFormBtn").addEventListener("click", newBlogHandler);

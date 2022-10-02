@@ -15,12 +15,11 @@ router.post("/newblog", withAuth, async (req, res) => {
   }
 });
 
-router.delete("/deleteblog/:id", withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const blogData = await Blog.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id,
       },
     });
 
@@ -35,10 +34,10 @@ router.delete("/deleteblog/:id", withAuth, async (req, res) => {
   }
 });
 
-router.put("/editblog/:id", withAuth, async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
   try {
     const affectedBlog = await Blog.update(
-      { title: req.body.title, body: req.body.body, user: req.body.user_id },
+      { title: req.body.title, content: req.body.content },
       {
         where: {
           id: req.params.id,

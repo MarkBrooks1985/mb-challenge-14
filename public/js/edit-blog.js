@@ -1,29 +1,25 @@
+const editButton = document.getElementById("editBlog");
+const blogId = document.getElementById("blogId");
+
 const editBlog = async (event) => {
   event.preventDefault();
 
-  const id = document.querySelector("#disabled-text").value.trim();
-  const title = document.querySelector("#title-entry").value.trim();
-  const content = document.querySelector("#content-entry").value.trim();
+  const title = document.getElementById("blogTitle").innerHTML;
+  const body = document.getElementById("blogBody").innerHTML;
+  console.log(blogId, title, body);
+  if (title && body) {
+    const putResponse = await fetch(`/api/blog/${blogId}`, {
+      method: "PUT",
+      body: JSON.stringify({ title, body }),
+      headers: { "Content-Type": "application/json" },
+    });
 
-  if (id && title && content) {
-    if (response.ok) {
-      const userData = await response.json();
-
-      const user_id = userData.id;
-
-      const putResponse = await fetch(`/api/blog/${blog_id}`, {
-        method: "PUT",
-        body: JSON.stringify({ id, title, content, blog_id }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (putResponse.ok) {
-        document.location.replace(`/blog/${blog_id}`);
-      }
+    if (putResponse.ok) {
+      document.location.replace(`/blog/${blogId}`);
     }
   } else {
-    alert("Must enter all values plus valid username");
+    alert("Must enter all values");
   }
 };
 
-document.querySelector("#editBlogBtn").addEventListener("click", editBlog);
+editButton.addEventListener("click", editBlog);
